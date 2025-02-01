@@ -31,7 +31,7 @@ exit_message ()
 
 usage()
 {
-    echo -e "\nUsage: source imx-setup-release.sh
+    echo -e "\nUsage: source calixto-setup-release.sh
     Optional parameters: [-b build-dir] [-h]"
 echo "
     * [-b build-dir]: Build directory, if unspecified script uses 'build' as output directory
@@ -93,7 +93,7 @@ fi
 
 if [ -z "$MACHINE" ]; then
     echo setting to default machine
-    MACHINE='imx6qpsabresd'
+    MACHINE='imx93-calixto-versa_1gb'
 fi
 
 case $MACHINE in
@@ -152,6 +152,12 @@ fi
 META_FSL_BSP_RELEASE="${CWD}/sources/meta-imx/meta-imx-bsp"
 
 echo "" >> $BUILD_DIR/conf/bblayers.conf
+
+
+echo "# Calixto Yocto Project Release Layers" >> $BUILD_DIR/conf/bblayers.conf
+echo "BBLAYERS += \"\${BSPDIR}/sources/meta-calixto-nxp\"" >> conf/bblayers.conf
+echo "" >> $BUILD_DIR/conf/bblayers.conf
+
 echo "# i.MX Yocto Project Release layers" >> $BUILD_DIR/conf/bblayers.conf
 hook_in_layer meta-imx/meta-imx-bsp
 hook_in_layer meta-imx/meta-imx-sdk
